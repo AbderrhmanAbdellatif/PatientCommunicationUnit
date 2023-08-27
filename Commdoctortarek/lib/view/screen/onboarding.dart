@@ -1,8 +1,27 @@
+import 'package:commdoctortarek/core/constant/Appcolor.dart';
 import 'package:commdoctortarek/data/datasource/static/static.dart' as staticData;
-import 'package:dartz/dartz.dart'; // Note: this package is imported but not used in your provided code.
 import 'package:flutter/material.dart';
 
+import '../../data/datasource/static/static.dart';
+
 class OnBoarding extends StatelessWidget {
+  // Define text styles as constant
+  static const _titleStyle = TextStyle(
+    fontSize: 24.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
+  static const _bodyStyle = TextStyle(
+    fontSize: 18.0,
+    height: 1.5,
+    color: AppColor.primaryColor,
+  );
+
+  // Define the spacer and SizedBox as constant
+  static const _spacer = Spacer();
+  static const _sizedBox = SizedBox(height: 80.0);
+
   const OnBoarding({Key? key}) : super(key: key);
 
   @override
@@ -13,35 +32,41 @@ class OnBoarding extends StatelessWidget {
           itemCount: staticData.onBoardingList.length,
           itemBuilder: (context, i) {
             final item = staticData.onBoardingList[i];
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,  // Align items to the center
-              children: [
-                if (item.title != null)
-                  Text(
-                    item.title!,
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+            return Padding(
+              padding: const EdgeInsets.all(16.0),  // Add padding
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (item.title != null) Text(item.title!, style: _titleStyle),
+                        _sizedBox,
+                        if (item.Image != null) Image.asset(item.Image!),
+                        _sizedBox,
+                        if (item.Body != null) Text(
+                          item.Body!,
+                          textAlign: TextAlign.center,
+                          style: _bodyStyle,
+                        ),
+                      ],
                     ),
                   ),
-                SizedBox(height: 80.0),  // Adding a SizedBox
-                if (item.Image != null) Image.asset(item.Image!),
-                SizedBox(height: 80.0),  // Adding a SizedBox
-                Spacer(),  // Pushes everything below to the center
-                if (item.Body != null)
-                  Text(
-                    item.Body!,
-                    textAlign: TextAlign.center, // This will center-align the text
-                    style: TextStyle(
-                      fontSize: 18.0,  // Adjust font size as needed
-                      height: 1.5,     // This adjusts the line spacing. Adjust the value as needed.
-                      color: Colors.black,
+                  Expanded(
+                    flex: 1,
+                    child: ListView.builder(
+                      itemCount: staticData.onBoardingList.length,
+                      itemBuilder: (context, index) => AnimatedContainer(
+                        duration: Duration(milliseconds: 900), // Changed from 'microseconds' to 'milliseconds'
+                        // Add additional properties for AnimatedContainer if needed
+                      ),
                     ),
                   ),
-
-                Spacer(),  // Takes up remaining space
-              ],
+                  // Removed the _spacer here as it wasn't fitting in your layout
+                ],
+              ),
             );
           },
         ),

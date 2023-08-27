@@ -1,4 +1,4 @@
-class ImageAsset {
+class AppImageAsset {
   static const String rootAssets="assets/images";
   static const String OnBordingImageone="$rootAssets/start.png";
   static const String OnBordingImagetwo="$rootAssets/chat.png";
