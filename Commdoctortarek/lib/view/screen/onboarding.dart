@@ -20,7 +20,7 @@ class OnBoarding extends StatelessWidget {
 
   // Define the spacer and SizedBox as constant
   static const _spacer = Spacer();
-  static const _sizedBox = SizedBox(height: 80.0);
+  static const _sizedBox = SizedBox(height: 50.0);
 
   const OnBoarding({Key? key}) : super(key: key);
 
@@ -33,25 +33,28 @@ class OnBoarding extends StatelessWidget {
           itemBuilder: (context, i) {
             final item = staticData.onBoardingList[i];
             return Padding(
-              padding: const EdgeInsets.all(16.0),  // Add padding
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Only use Expanded if necessary, else you can leave this out.
                   Expanded(
                     flex: 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (item.title != null) Text(item.title!, style: _titleStyle),
-                        _sizedBox,
-                        if (item.Image != null) Image.asset(item.Image!),
-                        _sizedBox,
-                        if (item.Body != null) Text(
-                          item.Body!,
-                          textAlign: TextAlign.center,
-                          style: _bodyStyle,
-                        ),
-                      ],
+                    child: SingleChildScrollView(  // Add this
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (item.title != null) Text(item.title!, style: _titleStyle),
+                          _sizedBox,
+                          if (item.Image != null) Image.asset(item.Image!),
+                          _sizedBox,
+                          if (item.Body != null) Text(
+                            item.Body!,
+                            textAlign: TextAlign.center,
+                            style: _bodyStyle,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -59,12 +62,16 @@ class OnBoarding extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: staticData.onBoardingList.length,
                       itemBuilder: (context, index) => AnimatedContainer(
-                        duration: Duration(milliseconds: 900), // Changed from 'microseconds' to 'milliseconds'
-                        // Add additional properties for AnimatedContainer if needed
+                        duration: Duration(milliseconds: 900),
+                        width: 5,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          color: AppColor.primaryColor,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
                       ),
                     ),
                   ),
-                  // Removed the _spacer here as it wasn't fitting in your layout
                 ],
               ),
             );
