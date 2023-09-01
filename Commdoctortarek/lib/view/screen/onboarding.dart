@@ -1,5 +1,8 @@
 // Importing the required modules and widgets for the application.
 // Custom UI widgets for the onboarding process.
+import 'package:commdoctortarek/controller/onborarding_controller.dart';
+import 'package:get/get.dart';
+
 import '../widget/onborading/custombutton.dart';
 import '../widget/onborading/customslider.dart';
 import '../widget/onborading/dotcontroller.dart';
@@ -16,7 +19,13 @@ class OnBoarding extends StatelessWidget {
   // The build method to describe the part of the widget tree this widget controls.
   @override
   Widget build(BuildContext context) {
-    // A Scaffold widget provides a basic structure for the Material App.
+    // Instantiate and register the OnBoardingControllerImp (the concrete implementation)
+    // with GetX dependency injection.
+    print("Before putting the controller.");
+    Get.put(OnBoardingControllerImp());
+    print("After putting the controller.");
+
+
     return const Scaffold(
       // Background color set to white for the whole scaffold.
       backgroundColor: Colors.white,

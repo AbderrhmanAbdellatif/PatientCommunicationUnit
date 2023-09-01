@@ -24,7 +24,7 @@ class CustomButtonOnBoarding extends StatelessWidget {
         // Define an empty function for onPressed, this should be modified to perform an action
         onPressed: () {},
         // Set the background color of the button to primaryColor
-        color: AppColor.primaryColor,
+        color: AppColor.infoColor,
         // Define the child widget for MaterialButton as Text with value "Continue"
         child: const Text("Continue"),
       ),
